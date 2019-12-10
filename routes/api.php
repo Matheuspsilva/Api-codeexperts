@@ -3,9 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,4 +16,20 @@ use Illuminate\Http\Response;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('test', function (Request $request) {
+
+    dd($request->headers->get('Authorization'));
+
+    $response = new Response(json_encode(['msg' => 'Minha primeira resposta de API']));
+    $response->header('Content-Type','application/json');
+
+    return $response;
+});
+
+//Products Route
+
+Route::get('/products', function () {
+    return \App\Product::all();
 });
